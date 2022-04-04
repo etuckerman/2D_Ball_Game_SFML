@@ -48,9 +48,28 @@ void Player::updateInput()
 
 }
 
-void Player::update()
+void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
+{
+	//left window collision
+	sf::FloatRect playerBounds = this->shape.getGlobalBounds();
+	if (playerBounds.left <= 0.f)
+		this->shape.setPosition(0.f, playerBounds.top);
+	//right window collision
+	if (playerBounds.left + playerBounds.width >= target->getSize().x)
+		this->shape.setPosition(target->getSize().x - playerBounds.width, playerBounds.top);
+	//top window collision
+	if (playerBounds.top <= 0.f)
+		this->shape.setPosition(playerBounds.left, 0.f);
+	//top window collision
+	if (playerBounds.top + playerBounds.height >= target->getSize().y)
+		this->shape.setPosition(playerBounds.left, target->getSize().y - playerBounds.height);
+}
+
+void Player::update(const sf::RenderTarget* target)
 {
 	//window bounds collision
+	this->updateWindowBoundsCollision(target);
+
 
 	this->updateInput();
 }

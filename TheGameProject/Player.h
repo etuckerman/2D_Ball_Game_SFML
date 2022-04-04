@@ -22,7 +22,8 @@ public:
 	virtual ~Player();
 
 	void updateInput();
-	void update();
+	void updateWindowBoundsCollision(const sf::RenderTarget* target);
+	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
 };
 
