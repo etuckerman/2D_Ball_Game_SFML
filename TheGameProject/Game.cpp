@@ -62,7 +62,7 @@ void Game::spawnSwagBalls()
 	{
 		if (this->swagBalls.size() < this->maxSwagBalls)
 		{
-			this->swagBalls.push_back(Swagball());
+			this->swagBalls.push_back(Swagball(*this->window));
 
 			this->spawnTimer = 0.f;
 		}
