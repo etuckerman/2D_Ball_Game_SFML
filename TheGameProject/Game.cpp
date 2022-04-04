@@ -70,12 +70,29 @@ void Game::spawnSwagBalls()
 	}
 }
 
+void Game::updateCollision()
+{
+	//check collisions
+	for (size_t i = 0; i < this->swagBalls.size(); i++)
+	{
+		if (this->player.getShape().getGlobalBounds().intersects(this->swagBalls[i].getShape().getGlobalBounds()))
+		{
+			this->swagBalls.erase(this->swagBalls.begin() + i);
+		}
+	
+	}
+
+	
+}
+
 void Game::update()
 {
 	this->pollEvents();
 
 	this->spawnSwagBalls();
 	this->player.update(this->window);
+	this->updateCollision();
+
 }
 
 void Game::render()
