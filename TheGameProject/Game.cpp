@@ -6,6 +6,7 @@ void Game::initVariables()
 	this->spawnTimerMax = 10.f;
 	this->spawnTimer = this->spawnTimerMax;
 	this->maxSwagBalls = 10;
+	this->points = 0;
 }
 
 void Game::initWindow()
@@ -15,11 +16,30 @@ void Game::initWindow()
 	this->window->setFramerateLimit(60);
 }
 
+void Game::initFonts()
+{
+	if (this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
+	{
+		std::cout << "! ERROR::GAME::INITFONT::COULD NOT LOAD PixellettersFull" << "\n";
+	}
+
+}
+
+void Game::initText()
+{
+	//text Gui init
+	this->guiText.setFont(this->font);
+	this->guiText.setFillColor(sf::Color::White);
+	this->guiText.setCharacterSize(32);
+}
+
 //constructors and destructors
 Game::Game()
 {
 	this->initVariables();
 	this->initWindow();
+	this->initFonts();
+	this->initText();
 }
 
 Game::~Game()
@@ -78,11 +98,21 @@ void Game::updateCollision()
 		if (this->player.getShape().getGlobalBounds().intersects(this->swagBalls[i].getShape().getGlobalBounds()))
 		{
 			this->swagBalls.erase(this->swagBalls.begin() + i);
+			this->points++;
 		}
 	
 	}
 
 	
+}
+
+void Game::updateGui()
+{
+	std::stringstream ss;
+
+	ss << " - Points: " << this->points;
+
+	this->guiText.setString(ss.str());
 }
 
 void Game::update()
@@ -92,7 +122,13 @@ void Game::update()
 	this->spawnSwagBalls();
 	this->player.update(this->window);
 	this->updateCollision();
+	this->updateGui();
 
+}
+
+void Game::renderGui(sf::RenderTarget* target)
+{
+	target->draw(this->guiText);
 }
 
 void Game::render()
@@ -106,6 +142,9 @@ void Game::render()
 	{
 		i.render(*this->window);
 	}
+
+	//render gui
+	this->renderGui(this->window);
 
 	this->window->display();
 }
