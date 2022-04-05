@@ -5,7 +5,7 @@ void Game::initVariables()
 	this->endGame = false;
 	this->spawnTimerMax = 10.f;
 	this->spawnTimer = this->spawnTimerMax;
-	this->maxSwagBalls = 10;
+	this->maxBalls = 10;
 	this->points = 0;
 }
 
@@ -86,16 +86,16 @@ void Game::pollEvents()
 	}
 }
 
-void Game::spawnSwagBalls()
+void Game::spawnBalls()
 {
 	//timer
 	if (this->spawnTimer < this->spawnTimerMax)
 		this->spawnTimer += 1.f;
 	else
 	{
-		if (this->swagBalls.size() < this->maxSwagBalls)
+		if (this->balls.size() < this->maxBalls)
 		{
-			this->swagBalls.push_back(Swagball(*this->window, this->randBallType()));
+			this->balls.push_back(Ball(*this->window, this->randBallType()));
 
 			this->spawnTimer = 0.f;
 		}
@@ -105,13 +105,13 @@ void Game::spawnSwagBalls()
 
 const int Game::randBallType() const
 {
-	int type = SwagBallTypes::DEFAULT;
+	int type = BallTypes::DEFAULT;
 
 	int randValue = rand() % 100 + 1;
 	if (randValue > 60 && randValue <= 80)
-		type = SwagBallTypes::DAMAGING;
+		type = BallTypes::DAMAGING;
 	else if (randValue > 80 && randValue <= 100)
-		type = SwagBallTypes::HEALING;
+		type = BallTypes::HEALING;
 
 	return type;
 }
@@ -127,24 +127,24 @@ void Game::updatePlayer()
 void Game::updateCollision()
 {
 	//check collisions
-	for (size_t i = 0; i < this->swagBalls.size(); i++)
+	for (size_t i = 0; i < this->balls.size(); i++)
 	{
-		if (this->player.getShape().getGlobalBounds().intersects(this->swagBalls[i].getShape().getGlobalBounds()))
+		if (this->player.getShape().getGlobalBounds().intersects(this->balls[i].getShape().getGlobalBounds()))
 		{
-			switch (this->swagBalls[i].getType())
+			switch (this->balls[i].getType())
 			{
-			case SwagBallTypes::DEFAULT:
+			case BallTypes::DEFAULT:
 				this->points++;
 				break;
-			case SwagBallTypes::DAMAGING:
+			case BallTypes::DAMAGING:
 				this->player.takeDamage(5);
 				break;
-			case SwagBallTypes::HEALING:
+			case BallTypes::HEALING:
 				this->player.gainHealth(1);
 				break;
 			}
 			//remove the ball
-			this->swagBalls.erase(this->swagBalls.begin() + i);
+			this->balls.erase(this->balls.begin() + i);
 		}
 	}
 }
@@ -165,7 +165,7 @@ void Game::update()
 
 	if (this->endGame == false)
 	{ 
-		this->spawnSwagBalls();
+		this->spawnBalls();
 		this->updatePlayer();
 		this->updateCollision();
 		this->updateGui();
@@ -184,7 +184,7 @@ void Game::render()
 	//render stuff
 	this->player.render(this->window);
 
-	for (auto i : this->swagBalls)
+	for (auto i : this->balls)
 	{
 		i.render(*this->window);
 	}

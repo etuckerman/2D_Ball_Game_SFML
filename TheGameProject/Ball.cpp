@@ -1,6 +1,6 @@
-#include "Swagball.h"
+#include "Ball.h"
 
-void Swagball::initShape(const sf::RenderWindow& window)
+void Ball::initShape(const sf::RenderWindow& window)
 {
 	this->shape.setRadius(static_cast<float>(rand()%10+10));
 
@@ -31,33 +31,33 @@ void Swagball::initShape(const sf::RenderWindow& window)
 	);
 }
 
-Swagball::Swagball(const sf::RenderWindow& window, int type)
+Ball::Ball(const sf::RenderWindow& window, int type)
 	: type(type)  //initializer
 {
 	this->initShape(window);
 }
 
-Swagball::~Swagball()
+Ball::~Ball()
 {
 
 }
 
-const sf::CircleShape Swagball::getShape() const
+const sf::CircleShape Ball::getShape() const
 {
 	return this->shape;
 }
 
-const int & Swagball::getType() const
+const int & Ball::getType() const
 {
 	return this->type;
 }
 
-void Swagball::update()
+void Ball::update()
 {
 
 }
 
-void Swagball::render(sf::RenderTarget& target)
+void Ball::render(sf::RenderTarget& target)
 {
 	target.draw(this->shape);
 }

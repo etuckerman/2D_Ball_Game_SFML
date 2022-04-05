@@ -6,7 +6,7 @@
 #include<sstream>
 
 #include "Player.h"
-#include "Swagball.h"
+#include "Ball.h"
 
 
 class Game
@@ -25,10 +25,10 @@ private:
 	sf::Text guiText;
 	sf::Text endGameText;
 
-	std::vector<Swagball> swagBalls;
+	std::vector<Ball> balls;
 	float spawnTimerMax;
 	float spawnTimer;
-	int maxSwagBalls;
+	int maxBalls;
 
 	void initVariables();
 	void initWindow();
@@ -49,7 +49,7 @@ public:
 	const bool running() const;
 	void pollEvents();
 
-	void spawnSwagBalls();
+	void spawnBalls();
 	const int randBallType() const;
 	void updatePlayer();
 	void updateCollision();

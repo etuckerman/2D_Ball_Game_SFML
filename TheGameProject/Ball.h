@@ -7,9 +7,9 @@
 #include <SFML/Network.hpp>
 
 
-enum SwagBallTypes {DEFAULT = 0, DAMAGING, HEALING, NROFTYPES};
+enum BallTypes {DEFAULT = 0, DAMAGING, HEALING, NROFTYPES};
 
-class Swagball
+class Ball
 {
 private:
 	sf::CircleShape shape;
@@ -17,8 +17,8 @@ private:
 
 	void initShape(const sf::RenderWindow& window);
 public:
-	Swagball(const sf::RenderWindow& window, int type);
-	virtual ~Swagball();
+	Ball(const sf::RenderWindow& window, int type);
+	virtual ~Ball();
 
 	//accessor
 	const sf::CircleShape getShape() const;
