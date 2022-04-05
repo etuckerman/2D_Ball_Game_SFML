@@ -37,7 +37,7 @@ void Game::initText()
 	this->endGameText.setFillColor(sf::Color::Red);
 	this->endGameText.setCharacterSize(60);
 	this->endGameText.setPosition(sf::Vector2f(20, 100));
-	this->endGameText.setString("YOU DIED");
+	this->endGameText.setString("YOU DIED \n PRESS ESC TO QUIT");
 }
 
 //constructors and destructors
@@ -91,8 +91,7 @@ void Game::spawnSwagBalls()
 	//timer
 	if (this->spawnTimer < this->spawnTimerMax)
 		this->spawnTimer += 1.f;
-
-	else 
+	else
 	{
 		if (this->swagBalls.size() < this->maxSwagBalls)
 		{
@@ -102,6 +101,7 @@ void Game::spawnSwagBalls()
 		}
 	}
 }
+
 
 const int Game::randBallType() const
 {
@@ -121,7 +121,7 @@ void Game::updatePlayer()
 	this->player.update(this->window);
 
 	if (this->player.getHp() <= 0)
-		this->endGame == true;
+		this->endGame = true;
 }
 
 void Game::updateCollision()
