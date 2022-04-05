@@ -33,7 +33,7 @@ void Swagball::initShape(const sf::RenderWindow& window)
 }
 
 Swagball::Swagball(const sf::RenderWindow& window, int type)
-	:type(type)  //initializer
+	: type(type)  //initializer
 {
 	this->type = type;
 	this->initShape(window);
