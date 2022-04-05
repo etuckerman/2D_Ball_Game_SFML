@@ -1,14 +1,12 @@
 #include <iostream>
 #include "Game.h"
 
-using namespace sf;
-
 int main() 
 {
-	//initialize random seed
+	//rand seed
 	srand(static_cast<unsigned>(time(0)));
 
-	//initialize game object
+	//game object
 	Game game;
 
 
@@ -19,6 +17,6 @@ int main()
 		game.render();
 	}
 
-	//end of application
+	//end
 	return 0;
 }

@@ -12,7 +12,7 @@
 class Game
 {
 private:
-	sf::VideoMode videomode;
+	sf::VideoMode videoMode;
 	sf::RenderWindow* window;
 	bool endGame;
 	sf::Event sfmlEvent;

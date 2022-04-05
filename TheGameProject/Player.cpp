@@ -33,12 +33,12 @@ const sf::RectangleShape & Player::getShape() const
 	return this->shape;
 }
 
-const int& Player::getHp() const
+const int & Player::getHp() const
 {
 	return this->hp;
 }
 
-const int& Player::getHpMax() const
+const int & Player::getHpMax() const
 {
 	return this->hpMax;
 }
@@ -85,7 +85,7 @@ void Player::updateInput()
 
 }
 
-void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)	  //update bounds after every change of position
+void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)	  //update bounds after every change of position
 {
 	//left window collision
 	if (this->shape.getGlobalBounds().left <= 0.f)
@@ -103,14 +103,15 @@ void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)	  //upd
 
 void Player::update(const sf::RenderTarget* target)
 {
+	this->updateInput();
+
 	//window bounds collision
+
 	this->updateWindowBoundsCollision(target);
 
-
-	this->updateInput();
 }
 
-void Player::render(sf::RenderTarget* target)
+void Player::render(sf::RenderTarget * target)
 {
 	target->draw(this->shape);
 }

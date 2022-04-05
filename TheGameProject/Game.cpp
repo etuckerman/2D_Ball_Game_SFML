@@ -11,16 +11,16 @@ void Game::initVariables()
 
 void Game::initWindow()
 {
-	this->videomode = sf::VideoMode(800, 600);
-	this->window = new sf::RenderWindow(this->videomode, "Game 2", sf::Style::Close | sf::Style::Titlebar);
+	this->videoMode = sf::VideoMode(800, 600);
+	this->window = new sf::RenderWindow(this->videoMode, "TheGameProject", sf::Style::Close | sf::Style::Titlebar);
 	this->window->setFramerateLimit(60);
 }
 
 void Game::initFonts()
 {
-	if (this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
+	if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
 	{
-		std::cout << "! ERROR::GAME::INITFONT::COULD NOT LOAD PixellettersFull" << "\n";
+		std::cout << " ! ERROR::GAME::INITFONTS::COULD NOT LOAD PixellettersFull.ttf" << "\n";
 	}
 
 }
@@ -36,7 +36,7 @@ void Game::initText()
 	this->endGameText.setFont(this->font);
 	this->endGameText.setFillColor(sf::Color::Red);
 	this->endGameText.setCharacterSize(60);
-	this->endGameText.setPosition(sf::Vector2f(20, 300));
+	this->endGameText.setPosition(sf::Vector2f(20, 100));
 	this->endGameText.setString("YOU DIED");
 }
 
@@ -54,10 +54,11 @@ Game::~Game()
 	delete this->window;
 }
 
-const bool & Game::getEndGame() const
+const bool& Game::getEndGame() const
 {
 	return this->endGame;
 }
+
 
 
 //functions  
@@ -87,7 +88,6 @@ void Game::pollEvents()
 
 void Game::spawnSwagBalls()
 {
-
 	//timer
 	if (this->spawnTimer < this->spawnTimerMax)
 		this->spawnTimer += 1.f;
@@ -100,7 +100,6 @@ void Game::spawnSwagBalls()
 
 			this->spawnTimer = 0.f;
 		}
-		
 	}
 }
 
@@ -164,7 +163,7 @@ void Game::update()
 {
 	this->pollEvents();
 
-	if(this->endGame == false)
+	if (this->endGame == false)
 	{ 
 		this->spawnSwagBalls();
 		this->updatePlayer();

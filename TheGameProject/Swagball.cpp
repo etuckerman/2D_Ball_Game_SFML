@@ -10,7 +10,6 @@ void Swagball::initShape(const sf::RenderWindow& window)
 	case DEFAULT:
 			color = sf::Color(rand() % 255 + 1, rand() % 255 + 1, rand() % 255 + 1);
 			break;
-	
 	case DAMAGING:
 			color = sf::Color::Red;
 			this->shape.setOutlineColor(sf::Color::Magenta);
@@ -35,7 +34,6 @@ void Swagball::initShape(const sf::RenderWindow& window)
 Swagball::Swagball(const sf::RenderWindow& window, int type)
 	: type(type)  //initializer
 {
-	this->type = type;
 	this->initShape(window);
 }
 
@@ -49,7 +47,7 @@ const sf::CircleShape Swagball::getShape() const
 	return this->shape;
 }
 
-const int& Swagball::getType() const
+const int & Swagball::getType() const
 {
 	return this->type;
 }
