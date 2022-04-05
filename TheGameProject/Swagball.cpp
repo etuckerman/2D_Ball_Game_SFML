@@ -11,14 +11,14 @@ void Swagball::initShape(const sf::RenderWindow& window)
 			color = sf::Color(rand() % 255 + 1, rand() % 255 + 1, rand() % 255 + 1);
 			break;
 	case DAMAGING:
-			color = sf::Color::Red;
-			this->shape.setOutlineColor(sf::Color::Magenta);
+			color = sf::Color::Black;
+			this->shape.setOutlineColor(sf::Color::Red);
 			this->shape.setOutlineThickness(2.f);
 			break;
 	case HEALING:
-			color = sf::Color::Green;
-			this->shape.setOutlineColor(sf::Color::Yellow);
-			this->shape.setOutlineThickness(2.f);
+			color = sf::Color::White;
+			this->shape.setOutlineColor(sf::Color::Green);
+			this->shape.setOutlineThickness(5.f);
 			break;
 	}
 
