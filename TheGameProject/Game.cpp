@@ -20,7 +20,7 @@ void Game::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
 	{
-		std::cout << " ! ERROR::GAME::INITFONTS::COULD NOT LOAD PixellettersFull.ttf" << "\n";
+		std::cout << " ! ERROR: Failed to load PixellettersFull.ttf" << "\n";
 	}
 
 }
